@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "89164eca-6acc-49d1-a9ca-34e946add547",
+		"name": "IO monitor",
+		"description": "https://bppcontrol.postman.co/monitors/1e9e52e1-0416-4bd0-af07-e632df494a8e?job=1e9e52e2-7a01-4650-aebf-a74bc03b2e58&workspace=a04a5def-2348-4efa-8977-ed2d1c573b82",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b60c527c-3f3a-4c3f-8606-76ebfb8564bf",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"pm.environment.set(\"authToken\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "joholtz",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "suki11bi11",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": "https://api.invertironline.com/token"
+			},
+			"response": []
+		},
+		{
+			"name": "titulo cotizacion actual Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6857975-42ff-4514-ab0c-6aa3a0dc1958",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"const echoPostRequest = {",
+							"  url: 'https://invertironline-bd01.restdb.io/rest/stats-ay24',",
+							"  method: 'POST',",
+							"  header: ['x-apikey:9453dea7836b4cb03cfda11094533dd8f0aa3',",
+							"  'Content-Type:application/json'],",
+							"  body: {",
+							"    mode: 'raw',",
+							"    raw: JSON.stringify({",
+							"\t\"bono_id\":\"ay24\",",
+							"\t\"moneda\":\"ARS\",",
+							"\t\"precio\":jsonData.ultimoPrecio,",
+							"\t\"fecha\":jsonData.fechaHora,",
+							"\t\"tendencia\":jsonData.tendencia",
+							"})",
+							"  }",
+							"};",
+							"pm.sendRequest(echoPostRequest, function (err, res) {",
+							"  console.log(err ? err : res.json());",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{authToken}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://api.invertironline.com/api/v2/{{mercado}}/Titulos/AY24/Cotizacion"
+			},
+			"response": []
+		},
+		{
+			"name": "titulo cotizacion actual CEPU",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6857975-42ff-4514-ab0c-6aa3a0dc1958",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"const echoPostRequest = {",
+							"  url: 'https://invertironline-bd01.restdb.io/rest/stats-ay24',",
+							"  method: 'POST',",
+							"  header: ['x-apikey:9453dea7836b4cb03cfda11094533dd8f0aa3',",
+							"  'Content-Type:application/json'],",
+							"  body: {",
+							"    mode: 'raw',",
+							"    raw: JSON.stringify({",
+							"\t\"bono_id\":\"CEPU\",",
+							"\t\"moneda\":\"ARS\",",
+							"\t\"precio\":jsonData.ultimoPrecio,",
+							"\t\"fecha\":jsonData.fechaHora,",
+							"\t\"tendencia\":jsonData.tendencia",
+							"})",
+							"  }",
+							"};",
+							"pm.sendRequest(echoPostRequest, function (err, res) {",
+							"  console.log(err ? err : res.json());",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{authToken}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://api.invertironline.com/api/v2/bCBA/Titulos/CEPU/Cotizacion"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "7bd221c2-a5d3-4324-8eb3-8e8f33f8addc",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3ca9881b-7369-4bbc-bc80-82aba040aa84",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

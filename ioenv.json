@@ -1,0 +1,59 @@
+{
+	"id": "08ec1acd-15c4-4859-aa57-77a1436a02d5",
+	"name": "invertirOnline",
+	"values": [
+		{
+			"key": "coveragesUri",
+			"value": "beta.coverages-api.melifrontends.com",
+			"enabled": true
+		},
+		{
+			"key": "authToken",
+			"value": "N7LCH_b9VTFZZir7EExNsCBhaCUvwfXUIZ0JFiRZu_RO2pY7UvTzI20OhQeO4vOZ1bWMhIicID1t70piNtH4I4eBOp9tIuo7kCbwu4qqFFe58YE1RtTCfBgtRN-PTN26n42th4Fgys4cdzFA_CIXdqKPOOl8Ics6VaGRuPql2vlDn9Je3ZYdY_t6wzW8_DTJTdbKnMEktmDAHy0zCJPijfCQa6gAH-nNEKrB5p1mGD8sgBMJikvl_WHLcukntqKQM3YNnkCNKBiLo2V14RoNleDYFvS1H7l-lDk1QYnTv_kvyW4y-Emqv1NCBTfaq32w",
+			"enabled": true
+		},
+		{
+			"key": "userid",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "mercado",
+			"value": "bCBA",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "paymentid",
+			"value": 5099553054,
+			"enabled": true
+		},
+		{
+			"key": "shippingid",
+			"value": "28104748720",
+			"enabled": true
+		},
+		{
+			"key": "logistictype",
+			"value": "drop_off",
+			"enabled": true
+		},
+		{
+			"key": "mode",
+			"value": "me2",
+			"enabled": true
+		},
+		{
+			"key": "receiverid",
+			"value": 165797804,
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2019-10-06T15:55:32.818Z",
+	"_postman_exported_using": "Postman/7.7.3"
+}
