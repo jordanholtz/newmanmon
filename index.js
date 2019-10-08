@@ -38,7 +38,7 @@ const init = async () => {
             newman.run({
                 collection: require('./newmanmon.json'),
                 environment: require('./ioenv.json'),
-                reporters: ['cli','json']
+                reporters: ['cli', 'json']
             }, function (err) {
                 if (err) { throw err; }
                 console.log('collection run complete!');
@@ -58,5 +58,10 @@ process.on('unhandledRejection', (err) => {
     process.exit(1);
 });
 
-
-init();
+try {
+    init();
+} catch (error) {
+    console.error(error);
+    // expected output: ReferenceError: nonExistentFunction is not defined
+    // Note - error messages will vary depending on browser
+}
