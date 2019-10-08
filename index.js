@@ -7,7 +7,7 @@ const HapiCron = require('hapi-cron');
 const init = async () => {
 
     const server = Hapi.server({
-        port: ( process.env.PORT || 5000),
+        port: parseInt(process.env.PORT, 10) || 5000,
         host: 'localhost'
     });
 
