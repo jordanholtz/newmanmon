@@ -53,6 +53,13 @@ const init = async () => {
         handler: (request, h) => {
             return 'pong!';
         }
+    },
+    {
+        method: 'GET',
+        path: '/',
+        handler: (request, h) => {
+            return 'root!';
+        }
     }]);
 
     await server.start();
