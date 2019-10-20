@@ -20,7 +20,7 @@ const init = async () => {
                 timezone: 'Europe/London',
                 request: {
                     method: 'GET',
-                    url: '/io'
+                    url: '/ping'
                 },
                 onComplete: (res) => {
                     console.log(res); // 'hello world'
@@ -29,7 +29,7 @@ const init = async () => {
         }
     });
 
-    server.route({
+    server.route([{
         method: 'GET',
         path: '/io',
         handler: (request, h) => {
@@ -46,7 +46,14 @@ const init = async () => {
 
             return 'Newman World!';
         }
-    });
+    },
+    {
+        method: 'GET',
+        path: '/ping',
+        handler: (request, h) => {
+            return 'pong!';
+        }
+    }]);
 
     await server.start();
     console.log('Server running on %s', server.info.uri);
