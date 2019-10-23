@@ -6,7 +6,6 @@ const HapiCron = require('hapi-cron');
 
 const init = async () => {
     const PORT = process.env.PORT || 3000;
-    console.log("PUERTOOOOOO", process.env.PORT);
 
     const server = Hapi.server({
         port: PORT,
@@ -22,7 +21,7 @@ const init = async () => {
                 timezone: 'Europe/London',
                 request: {
                     method: 'GET',
-                    url: '/ping'
+                    url: '/io'
                 },
                 onComplete: (res) => {
                     console.log(res); // 'hello world'
@@ -55,14 +54,8 @@ const init = async () => {
         handler: (request, h) => {
             return 'pong!';
         }
-    },
-    {
-        method: 'GET',
-        path: '/',
-        handler: (request, h) => {
-            return 'root!';
-        }
-    }]);
+    }
+    ]);
 
     await server.start();
     console.log('Server running on %s', server.info.uri);
