@@ -5,9 +5,10 @@ const newman = require('newman'); // require newman in your project
 const HapiCron = require('hapi-cron');
 
 const init = async () => {
+    const PORT = process.env.PORT || 3000;
 
     const server = Hapi.server({
-        port: 3000,
+        port: PORT,
         host: 'localhost'
     });
 
