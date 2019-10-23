@@ -6,10 +6,11 @@ const HapiCron = require('hapi-cron');
 
 const init = async () => {
     const PORT = process.env.PORT || 3000;
+    console.log("PUERTOOOOOO", process.env.PORT);
 
     const server = Hapi.server({
         port: PORT,
-        host: 'localhost'
+        host: '0.0.0.0'
     });
 
     await server.register({
