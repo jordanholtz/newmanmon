@@ -3,6 +3,7 @@
 const Hapi = require('@hapi/hapi');
 const newman = require('newman'); // require newman in your project
 const HapiCron = require('hapi-cron');
+const fetch = require('node-fetch');
 
 const init = async () => {
     const PORT = process.env.PORT || 3000;
@@ -21,7 +22,7 @@ const init = async () => {
                 timezone: 'Europe/London',
                 request: {
                     method: 'GET',
-                    url: '/io'
+                    url: '/ping'
                 },
                 onComplete: (res) => {
                     console.log(res); // 'hello world'
@@ -39,13 +40,50 @@ const init = async () => {
             newman.run({
                 collection: require('./newmanmon.json'),
                 environment: require('./ioenv.json'),
-                reporters: ['cli', 'json']
+                reporters: ['cli']
             }, function (err) {
                 if (err) { throw err; }
                 console.log('collection run complete!');
             });
 
             return 'Newman World!';
+        }
+    },
+    {
+        method: 'GET',
+        path: '/shared/{collectionid?}',
+        handler: (request, h) => {
+            
+            const collection = fetch('https://www.getpostman.com/collections/'+request.params.collectionid);
+                /*.then(res => res.json())
+                .then(json => {
+
+                    newman.run({
+                        collection: json,
+                        environment: require('./ioenv.json'),
+                        reporters: ['cli']
+                    }, function (err, res) {
+                        if (err) { throw err; }
+
+                        return 'resp';
+                    });
+        
+                });*/
+            
+            return collection.then(res => res.json())
+            .then(json => {
+
+                newman.run({
+                    collection: json,
+                    environment: require('./ioenv.json'),
+                    reporters: ['cli']
+                }, function (err, res) {
+                    if (err) { throw err; }
+
+                    return 'resp';
+                });
+    
+            });//.then(res => 'hola');
         }
     },
     {
