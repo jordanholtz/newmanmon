@@ -18,11 +18,11 @@ const init = async () => {
         options: {
             jobs: [{
                 name: 'testcron',
-                time: '*/10 * * * *',
+                time: '*/10 11-17 * * *',
                 timezone: 'Europe/London',
                 request: {
                     method: 'GET',
-                    url: '/ping'
+                    url: '/shared/d045955d23edb95ffaa4'
                 },
                 onComplete: (res) => {
                     console.log(res); // 'hello world'
@@ -54,22 +54,7 @@ const init = async () => {
         path: '/shared/{collectionid?}',
         handler: (request, h) => {
             
-            const collection = fetch('https://www.getpostman.com/collections/'+request.params.collectionid);
-                /*.then(res => res.json())
-                .then(json => {
-
-                    newman.run({
-                        collection: json,
-                        environment: require('./ioenv.json'),
-                        reporters: ['cli']
-                    }, function (err, res) {
-                        if (err) { throw err; }
-
-                        return 'resp';
-                    });
-        
-                });*/
-            
+            const collection = fetch('https://www.getpostman.com/collections/'+request.params.collectionid);            
             return collection.then(res => res.json())
             .then(json => {
 
@@ -79,11 +64,11 @@ const init = async () => {
                     reporters: ['cli']
                 }, function (err, res) {
                     if (err) { throw err; }
-
-                    return 'resp';
+                    console.log(new Date().toISOString() + ": Newman run finished for collection "+request.params.collectionid);
+                    return 'finish newman run.';
                 });
-    
-            });//.then(res => 'hola');
+            })
+            .then(res => '{ "status" : "scheduled" }');
         }
     },
     {
@@ -91,6 +76,31 @@ const init = async () => {
         path: '/ping',
         handler: (request, h) => {
             return 'pong!';
+        }
+    },
+    {
+        method: 'GET',
+        path: '/query',
+        handler: (request, h) => {
+
+            const collection = fetch('https://invertironline-bd01.restdb.io/rest/stats-ay24?q={"bono_id": "' +
+                request.query.bono_id + '"}&h={"$max":50,"$orderby":{"fecha":1}}',
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-apikey': '9453dea7836b4cb03cfda11094533dd8f0aa3'
+                    }
+                });
+
+            return collection.then(res => res.json())
+                .then(json => {
+                    var response = { prices : [], dates: [] };
+                    json.forEach(element => {
+                        response.prices.push(element.precio);
+                        response.dates.push(element.fecha.substring(0, 16)); 
+                    });
+                    return response;
+                });
         }
     }
     ]);
