@@ -18,7 +18,7 @@ const init = async () => {
         options: {
             jobs: [{
                 name: 'testcron',
-                time: '*/10 11-17 * * *',
+                time: '*/10 9-15 * * *',
                 timezone: 'Europe/London',
                 request: {
                     method: 'GET',
