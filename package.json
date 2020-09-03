@@ -14,7 +14,7 @@
   "author": "jordanh",
   "license": "ISC",
   "dependencies": {
-    "@hapi/hapi": "^18.4.0",
+    "@hapi/hapi": "^19.1.1",
     "chart.js": "^2.8.0",
     "hapi-cron": "^1.1.0",
     "newman": "^4.5.5",
