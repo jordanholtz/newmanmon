@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^18.4.0",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "hapi-cron": "^1.1.0",
     "newman": "^4.5.5",
     "node-fetch": "^2.6.0"
